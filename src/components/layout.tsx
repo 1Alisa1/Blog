@@ -1,12 +1,14 @@
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
+
+const setActive = ({isActive}: {isActive: boolean}) => isActive ? 'activeLink' : '';
 
 const Layout: React.FC = () => {
   return (
     <>
       <header className="nav">
-        <Link to="/">Home</Link>
-        <Link to="/blog">Blog</Link>
-        <Link to="/about">About</Link>
+        <NavLink to="/" className={setActive}>Home</NavLink>
+        <NavLink to="/blog" className={setActive}>Blog</NavLink>
+        <NavLink to="/about" className={setActive}>About</NavLink>
       </header>
 
       <main>
@@ -18,4 +20,4 @@ const Layout: React.FC = () => {
   );
 };
 
-export default Layout;
+export {Layout};

@@ -27,6 +27,11 @@ $bottom: 2rem;
   justify-content: center;
 }
 
+@mixin activeLink() {
+  color:rgb(0, 110, 255);
+  cursor: default;
+}
+
 .nav {
   width: 100%;
   height: 10vh;
@@ -40,8 +45,11 @@ $bottom: 2rem;
       &:visited {
         color:white;
       }
+      &.activeLink, &.activeLink:visited {
+        @include activeLink();
+      }
       &:hover {
-        color: darken(white, 10%);
+        color: darken(white, 15%);
       }
     } 
 }
