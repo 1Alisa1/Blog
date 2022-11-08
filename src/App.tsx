@@ -1,22 +1,22 @@
-import {Routes, Route, Link} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import AboutPage from './pages/aboutPage';
 import HomePage from './pages/homePage';
 import BlogPage from './pages/blogPage';
 import NotFoundPage from './pages/notFoundPage';
+import Layout from './components/layout';
 
 function App() {
   return (
     <>
-      <header className='nav'>
-          <Link to='/'>Home</Link>
-          <Link to='/blog'>Blog</Link>
-          <Link to='/about'>About</Link>
-      </header>
+      
       <Routes>
-        <Route path='/' element={<HomePage />} />;
-        <Route path='/about' element={<AboutPage />} />;
-        <Route path='/blog' element={<BlogPage />} />;
-        <Route path='*' element={<NotFoundPage />} />;
+        <Route path='/' element={<Layout />}>
+          <Route index element={<HomePage />} />;
+          <Route path='about' element={<AboutPage />} />;
+          <Route path='blog' element={<BlogPage />} />;
+          <Route path='*' element={<NotFoundPage />} />;
+        </Route>
+        
       </Routes>
     </>
   );
