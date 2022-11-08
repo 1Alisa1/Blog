@@ -1,6 +1,6 @@
 function AboutPage() {
   return (
-    <div></div>
+    <div className="wrapper">About us</div>
   );
 }
 

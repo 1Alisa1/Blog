@@ -7,10 +7,10 @@ import NotFoundPage from './pages/notFoundPage';
 function App() {
   return (
     <>
-      <header>
-        <Link to='/'>Home</Link>
-        <Link to='/blog'>Blog</Link>
-        <Link to='/about'>About</Link>
+      <header className='nav'>
+          <Link to='/'>Home</Link>
+          <Link to='/blog'>Blog</Link>
+          <Link to='/about'>About</Link>
       </header>
       <Routes>
         <Route path='/' element={<HomePage />} />;

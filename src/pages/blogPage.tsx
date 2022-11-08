@@ -1,6 +1,6 @@
 function BlogPage() {
   return (
-    <div></div>
+    <div className="wrapper">Blog</div>
   );
 }
 
