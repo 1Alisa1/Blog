@@ -7,7 +7,7 @@ const Layout: React.FC = () => {
     <>
       <header className="nav">
         <NavLink to="/" className={setActive}>Home</NavLink>
-        <NavLink to="/blog" className={setActive}>Blog</NavLink>
+        <NavLink to="/posts" className={setActive}>Blog</NavLink>
         <NavLink to="/about" className={setActive}>About</NavLink>
       </header>
 
