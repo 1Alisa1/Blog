@@ -70,5 +70,17 @@ $bottom: 2rem;
 
 .text {
   text-align: center;
+  margin-top: -15px;
+}
+
+.buttonLeft {
+  background-color: white;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  img {
+    width: 30px;
+    height: 20px;
+  }
 }
 
