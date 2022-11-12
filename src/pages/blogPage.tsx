@@ -14,6 +14,9 @@ function BlogPage() {
 
   return (
     <div className="wrapper">
+      <button className='addPost'>
+        <Link to='/posts/new'>Add new post</Link>
+      </button>
       {posts.map(post => (
         <Link className='postTitle' key={post.id} to={`/posts/${post.id}`}>
           <li>{post.title}</li>

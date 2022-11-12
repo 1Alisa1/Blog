@@ -1,25 +1,38 @@
-import {Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import AboutPage from './pages/aboutPage';
 import HomePage from './pages/homePage';
 import BlogPage from './pages/blogPage';
 import SinglePage from './pages/singlePage';
 import NotFoundPage from './pages/notFoundPage';
-import {Layout} from './components/layout';
+import LoginPage from './pages/loginPage';
+import { Layout } from './components/layout';
+import RequareAuth from './hoc/requireAuth';
+import { AuthProvider } from './hoc/authProvider';
+import CreatePost from './pages/createPost';
 
 function App() {
   return (
     <>
-      
-      <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route index element={<HomePage />} />;
-          <Route path='about' element={<AboutPage />} />;
-          <Route path='posts' element={<BlogPage />} />;
-          <Route path='posts/:id' element={<SinglePage />} />
-          <Route path='*' element={<NotFoundPage />} />;
-        </Route>
-        
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />;
+            <Route path="about" element={<AboutPage />} />;
+            <Route path="posts" element={<BlogPage />} />;
+            <Route path="posts/:id" element={<SinglePage />} />
+            <Route
+              path="posts/new"
+              element={
+                <RequareAuth>
+                  <CreatePost />
+                </RequareAuth>
+              }
+            />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="*" element={<NotFoundPage />} />;
+          </Route>
+        </Routes>
+      </AuthProvider>
     </>
   );
 }
