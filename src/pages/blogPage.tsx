@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import BlogFilter from '../components/blogFilter';
-import { Blog } from '../models/blog.model'
+import { Post } from '../models/post.model';
 
+interface BlogPageProps {
+  cachedPosts: Post[],
+}
 
-function BlogPage() {
-  const [posts, setPosts] = useState<Blog[]>([]);
+function BlogPage(props: BlogPageProps) {
+  const [posts, setPosts] = useState<Post[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const postQuery = searchParams.get('post') || '';
@@ -31,7 +34,10 @@ function BlogPage() {
       <button className='addPost'>
         <Link to='/posts/new'>Add new post</Link>
       </button>
-      {posts.filter(
+      {
+      posts
+      .concat(props.cachedPosts)
+      .filter(
         post => post.title.includes(postQuery) && +post.id >= startsFrom
       ).map(post => (
         <Link className='postTitle' key={post.id} to={`/posts/${post.id}`}>
