@@ -1,7 +1,7 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Post } from "../models/post.model";
-import left from "../img/left.png";
+import BackButton from "../components/backButton";
 
 interface SinglePageProps{
   cachedPosts: Post[]
@@ -9,10 +9,7 @@ interface SinglePageProps{
 
 const SinglePage = (props: SinglePageProps) => {
   const {id} = useParams();
-  const navigate = useNavigate();
   const [post, setPost] = useState<Post>();
-
-  const goBack = () => navigate(-1);
 
   useEffect(() => {
     if(props.cachedPosts.some(post => (post.id).toString() === id)) {
@@ -26,9 +23,7 @@ const SinglePage = (props: SinglePageProps) => {
 
   return (
     <div className="wrapper">
-      <button className='buttonLeft'onClick={goBack}>
-        <img src={left} alt='left'></img>
-      </button>
+      <BackButton step={-1} />
       {post && (
         <>
           <div className="text">
