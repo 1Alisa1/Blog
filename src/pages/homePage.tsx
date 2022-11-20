@@ -1,6 +1,6 @@
 function HomePage() {
   return (
-    <div className="wrapper">Home</div>
+    <h1 className="text-center">Home</h1>
   );
 }
 

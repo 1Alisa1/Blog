@@ -53,8 +53,8 @@ const CreatePost = (props: CreatePostProps) => {
   };
 
   return (
-    <div>
-      <h1>Create a post</h1>
+    <div className='wrapper'>
+      <h1 className='text-center'>Create a post</h1>
       <button onClick={() => signOut(() => navigate('/', { replace: true }))}>
         Log out
       </button>

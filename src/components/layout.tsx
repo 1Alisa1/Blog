@@ -15,7 +15,9 @@ const Layout: React.FC = () => {
         <Outlet />
       </main>
       
-      <footer>2022</footer>
+      <footer>
+        <div>© 2022 Company, Inc</div>
+      </footer>
     </>
   );
 };

@@ -1,6 +1,6 @@
 function AboutPage() {
   return (
-    <div className="wrapper">About us</div>
+    <h1 className="text-center">About us</h1>
   );
 }
 
