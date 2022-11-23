@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import AboutPage from './pages/aboutPage';
 import HomePage from './pages/homePage';
 import BlogPage from './pages/blogPage';
@@ -9,14 +8,10 @@ import LoginPage from './pages/loginPage';
 import { Layout } from './components/layout';
 import RequareAuth from './hoc/requireAuth';
 import { AuthProvider } from './hoc/authProvider';
-import { Post } from './models/post.model';
-import CreatePost from './pages/createPost';
+import  { CreatePost, CreatePostMode } from './pages/createPost';
 
 
 function App() {
-  const location = useLocation();
-  const navigate = useNavigate();
-
   return (
     <>
       <AuthProvider>
@@ -34,10 +29,11 @@ function App() {
               path="posts/new"
               element={
                 <RequareAuth>
-                  <CreatePost />
+                  <CreatePost mode={CreatePostMode.Create} />
                 </RequareAuth>
               }
             />
+            <Route path='posts/edit/:id' element={<RequareAuth><CreatePost mode={CreatePostMode.Edit} /></RequareAuth>}></Route>
             <Route path="login" element={<LoginPage />} />
             <Route path="*" element={<NotFoundPage />} />;
           </Route>

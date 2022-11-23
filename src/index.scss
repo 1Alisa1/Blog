@@ -156,4 +156,12 @@ $bottom: 2rem;
   margin-top: 0;
 }
 
+.editPost {
+  @include wrapper();
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
 
