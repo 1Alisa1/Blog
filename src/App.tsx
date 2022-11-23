@@ -14,29 +14,8 @@ import CreatePost from './pages/createPost';
 
 
 function App() {
-  const [cachedPosts, setCachedPosts] = useState<Post[]>([]);
   const location = useLocation();
   const navigate = useNavigate();
-
-  const addPostToCache = (newPost: Post) => {
-    const maxId = cachedPosts
-      .map(post => post.id)
-      .reduce((a, b) => (a > b ? a : b), 0);
-
-    const id = maxId === 0 ? newPost.id : maxId + 1;
-
-    const post = {
-      id: id,
-      title: newPost.title,
-      body: newPost.body,
-      userId: newPost.userId
-    };
-
-    setCachedPosts([...cachedPosts, post]);
-
-    const fromPage = location.state?.from?.pathname || `/posts/${id}`;
-    navigate(fromPage, {replace: true});
-  }
 
   return (
     <>
@@ -46,21 +25,16 @@ function App() {
             <Route index element={<HomePage />} />;
             <Route path="about" element={<AboutPage />} />;
             <Route path="posts" element={
-              <BlogPage 
-                cachedPosts={cachedPosts}
-              />
+              <BlogPage />
             } />;
             <Route path="posts/:id" element={
-              <SinglePage
-                cachedPosts={cachedPosts}
-              />
+              <SinglePage />
             } />
             <Route
               path="posts/new"
               element={
                 <RequareAuth>
-                  <CreatePost
-                    addPost={addPostToCache} />
+                  <CreatePost />
                 </RequareAuth>
               }
             />

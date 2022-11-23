@@ -1,16 +1,12 @@
 import { useAuth } from '../hook/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Post } from '../models/post.model';
 
-interface CreatePostProps {
-  addPost: (post: Post) => void;
-  
-}
-
-const CreatePost = (props: CreatePostProps) => {
+const CreatePost = () => {
   const { signOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   
   
   const [title, setTitle] = useState('');
@@ -21,7 +17,7 @@ const CreatePost = (props: CreatePostProps) => {
 
   useEffect(() => {
     if (post !== null) {
-      fetch('https://jsonplaceholder.typicode.com/posts', {
+      fetch('http://localhost:8000/posts', {
         method: 'POST',
         body: JSON.stringify(post),
         headers: {
@@ -29,7 +25,10 @@ const CreatePost = (props: CreatePostProps) => {
         },
       })
       .then((response) => response.json())
-      .then((json) => props.addPost(json as Post));
+      .then((json: Post) => {
+        const fromPage = location.state?.from?.pathname || `/posts/${json.id}`;
+        navigate(fromPage, {replace: true});
+      });
     }
   }, [post]);
 
@@ -38,7 +37,7 @@ const CreatePost = (props: CreatePostProps) => {
     setPost({
       title: title,
       body: body,
-      userId: new Date().toISOString(),
+      userId: new Date().getMilliseconds(),
     });
 
 

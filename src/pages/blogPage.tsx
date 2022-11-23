@@ -3,11 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import BlogFilter from '../components/blogFilter';
 import { Post } from '../models/post.model';
 
-interface BlogPageProps {
-  cachedPosts: Post[],
-}
-
-function BlogPage(props: BlogPageProps) {
+function BlogPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -19,7 +15,7 @@ function BlogPage(props: BlogPageProps) {
   
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
+    fetch('http://localhost:8000/posts')
       .then(res => res.json())
       .then(data => setPosts(data))
   }, []);
@@ -35,9 +31,7 @@ function BlogPage(props: BlogPageProps) {
         <Link to='/posts/new'>Add new post</Link>
       </button>
       {
-      posts
-      .concat(props.cachedPosts)
-      .filter(
+      posts.filter(
         post => post.title.includes(postQuery) && +post.id >= startsFrom
       ).map(post => (
         <Link className='postTitle' key={post.id} to={`/posts/${post.id}`}>

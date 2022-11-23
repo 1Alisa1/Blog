@@ -3,23 +3,15 @@ import { useState, useEffect } from "react";
 import { Post } from "../models/post.model";
 import BackButton from "../components/backButton";
 
-interface SinglePageProps{
-  cachedPosts: Post[]
-}
-
-const SinglePage = (props: SinglePageProps) => {
+const SinglePage = () => {
   const {id} = useParams();
   const [post, setPost] = useState<Post>();
 
   useEffect(() => {
-    if(props.cachedPosts.some(post => (post.id).toString() === id)) {
-      setPost(props.cachedPosts.filter(post => (post.id).toString() === id)[0]);
-    } else {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      fetch(`http://localhost:8000/posts/${id}`)
         .then(res => res.json())
         .then(data => setPost(data))
-    }
-  }, [id, props.cachedPosts]);
+  }, [id]);
 
   return (
     <div className="wrapper">
