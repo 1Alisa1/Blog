@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Post } from '../models/post.model';
 import BackButton from '../components/backButton';
@@ -6,6 +6,8 @@ import BackButton from '../components/backButton';
 const SinglePage = () => {
   const { id } = useParams();
   const [post, setPost] = useState<Post>();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:8000/posts/${id}`)

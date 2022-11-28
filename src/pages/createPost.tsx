@@ -97,6 +97,14 @@ const CreatePost = (props: CreatePostProps) => {
     setBody(e.currentTarget.value);
   };
 
+  const handleDeleteClick = () => {
+    fetch(`http://localhost:8000/posts/${id}`, {
+      method: 'DELETE',
+    });
+
+    navigate('/posts', { replace: true });
+  }
+
   return (
     <div className="wrapper">
       <h1 className="text-center">Create a post</h1>
@@ -117,7 +125,11 @@ const CreatePost = (props: CreatePostProps) => {
             value={body}
             onChange={handleBodyChange}
           ></textarea>
-          <input type="submit" value="Submit"></input>
+          <div className='buttons'>
+            <input type="submit" value="Submit"></input>
+            <button onClick={handleDeleteClick}>Delete</button>
+          </div>
+          
         </form>
       </div>
     </div>
